@@ -1,3 +1,4 @@
+---
 title: "gitlab CI 搭建过程填坑指南"
 date: 2018-05-07T18:16:20+08:00
 tags:
@@ -46,4 +47,3 @@ ERROR: Job failed: exit status 1
 #### xcode-build 在 Xcode9 之后的改动
 
 然后就是脚本内容了，脚本用的我在一年前写的脚本，然后不出意料的出错了，主要是因为 Xcode9 的 xcodebuild 工具去掉了 `-exportFormat` 和 `-exportProvisioningProfile`  选项，用 `-exportOptionsPlist exportOptions.plist`  代替就好啦。至此填坑完成，下一篇说一下 .gitlab-ci.yml 的配置选项及实践，敬请期待。
-
