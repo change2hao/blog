@@ -1,7 +1,7 @@
 ---
 title: "Mac下安装使用MongoDB"
 date: 2015-03-20T14:31:28+08:00
-tags: mongodb
+tags: 
 ---
 
 这段时间自己打算做一个视频聊天的app，客户端（iOS），服务器（NodeJS+MongoDB）打算全自己上。后者对我来说零经验，不过老话说的好，生命在于折腾嘛。今天先来说一下在Mac下如何搭建MongoDB环境。

@@ -1,7 +1,7 @@
 ---
 title: "ubuntu14.04搭建部署turnserver"
 date: 2015-03-05T00:25:22+08:00
-tags: webrtc
+tags: 
 ---
 最近做webrtc视频通话的app，需要搭建turnserver作为打洞服务器，整理了一下。
 

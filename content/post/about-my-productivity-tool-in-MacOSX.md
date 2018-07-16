@@ -1,7 +1,7 @@
 ---
 title: "生产力工具篇(MacOSX)"
 date: 2015-04-15T16:30:05+08:00
-tags: tools
+tags: 
 ---
 
 今天总结一下我在 MacOSX 下常用的工具，希望对那些 Mac 新手有些帮助。
