@@ -76,6 +76,7 @@ deploy:
 
 * script 部分，需要我们到 hugo 的 [下载地址](https://github.com/gohugoio/hugo/releases) 选择 **hugo_0.44_Linux-64bit.tar.gz** 进行下载，并解压，将其二进制文件拷贝到仓库根目录下的 binary 文件夹下，binary 没有的话自己创建一个。
 * local_dir: 设置为 public 是因为在执行 hugo 命令时会自动生成public目录，该目录下的文件即最终的站点文件。对 Github Pages 部署的时候也是部署的该文件夹下的文件。由于每次部署该文件夹下的文件都会重新生成，所以我们创建一个 .gitignore 文件，并将 `public` 添加进去，这样就不会纳入git的版本管理范畴。接下来在仓库根目录下执行
+
 ```
 git add .
 git commit -m "config travis.ci"
