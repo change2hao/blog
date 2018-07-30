@@ -8,9 +8,9 @@ install:
   - rm -rf public || exit 0
 # Build the website
 script:
-  - binary/hugo --theme=even
+  - binary/hugo
   # Create a CNAME file which maps your site to your custom domain
-  # - echo 'devtian.me' > public/CNAME
+  - echo 'devtian.me' > public/CNAME
 # Deploy to GitHub pages
 deploy:
   provider: pages
