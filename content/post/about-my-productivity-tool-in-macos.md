@@ -6,7 +6,6 @@ tags:
 
 今天总结一下我在 MacOSX 下常用的工具，希望对那些 Mac 新手有些帮助。
 
-<!--more--> 
 
 ## 密码管理器
 
@@ -22,19 +21,15 @@ OS X 不可或缺的套件管理器，类似 linux 中的 apt-get/yum。
 
 ## UI工具
 
-#### [PixelMator](http://www.pixelmator.com/)
+#### [Pixelmator](http://www.pixelmator.com/)
 
-Mac 下使用 PhotoShop 简直会抓狂，PixelMator 在使用体验上要爽很多，可以完全兼容 PSD 格式的文件，而且有个**小技巧**，它可以将PSD里的图层图片直接拖到桌面，在桌面会自动生成png格式的图片。
+Mac 下使用 PhotoShop 简直会抓狂，Pixelmator 在使用体验上要爽很多，可以完全兼容 PSD 格式的文件，而且有个**小技巧**，它可以将PSD里的图层图片直接拖到桌面，在桌面会自动生成png格式的图片。
 
 #### [Sketch](http://www.bohemiancoding.com/sketch/) 
 
 Sketch是目前非常流行的矢量图设计工具，团队的技术实力很强，迭代速度也很快，做产品很用心，非常值得一用。同时也有很多活跃的Sketch社区，这里推荐一个sektch中文社区 <http://www.sketchcn.com/>。
 
 ## 版本控制工具
-
-#### SVN：[Versions](http://versionsapp.com/)
-
-Versions 的功能相对比较简洁，对于一般的工作已经可以满足。
 
 #### Git：[SourceTree](http://sourcetreeapp.com/)
 
@@ -135,3 +130,5 @@ ffmpeg同样也是一款命令行工具，做过视频播放器的朋友肯定�
 <http://www.ffmpeg.org/ffmpeg.html>
 
 好了，就总结这么多吧，谁有更好玩的应用，也可以反馈给我哦！
+
+> 温馨提示: 留言板在科学上网环境下可见
