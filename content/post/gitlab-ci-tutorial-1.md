@@ -12,7 +12,7 @@ tags:
 
 因为是 iOS 项目，所以 gitlab-runner 需要选在 MacOS 平台，根据[官方文档](https://docs.gitlab.com/runner/register/index.html#macos) 一步步操作即可，其中 `Enter your GitLab instance URL:`  和 `Enter the token you obtained to register the Runner:` 需要根据自己的项目里面的指示进行操作，如图 1、2 ：
 
-![gitlab-runner](https://ws4.sinaimg.cn/large/006tKfTcgy1fr2tnr1izvj31bq11etgl.jpg)
+![gitlab-runner](/img/20190720082528.png)
 
 
 
@@ -22,7 +22,7 @@ tags:
 
 这样 gitlab runner 就搭建好了，但是我在这里遇到了一个问题，如图：
 
-![gitlab_warning](https://ws3.sinaimg.cn/large/006tKfTcly1fr2v48ngbaj30x808e3zc.jpg)
+![gitlab_warning](/img/20190720082629.png)
 
 这里有一个灰色的叹号，这说明设置有问题，主要是因为我在执行 `gitlab-runner register` 时，曾经加过一次 sudo，通过sudo执行的是root权限，生成的配置文件路径是 `/etc/gitlab-runner/config.toml ` ，用普通权限生成的配置文件路径是 `~/.gitlab-runner/config.toml` ，这样导致普通权限配置文件里面没有相应的配置信息，我把前者的内容替换到后者，执行 `gitlab-runner restart` ，变成了绿点，如第一张图所示，问题解决。
 
@@ -47,3 +47,5 @@ ERROR: Job failed: exit status 1
 #### xcode-build 在 Xcode9 之后的改动
 
 然后就是脚本内容了，脚本用的我在一年前写的脚本，然后不出意料的出错了，主要是因为 Xcode9 的 xcodebuild 工具去掉了 `-exportFormat` 和 `-exportProvisioningProfile`  选项，用 `-exportOptionsPlist exportOptions.plist`  代替就好啦。至此填坑完成，下一篇说一下 .gitlab-ci.yml 的配置选项及实践，敬请期待。
+
+> 温馨提示: 留言板在科学上网环境下可见
