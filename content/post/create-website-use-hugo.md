@@ -19,10 +19,10 @@ draft: false
 
 ### 0x00 在 Github 创建一个用于托管站点的仓库
 Hugo 官网有一个 [说明文档](https://gohugo.io/hosting-and-deployment/hosting-on-github/)，里面提到了两种情况，对应的网址有些不同。
-```
+```shell
 User/Organization Pages (https://<USERNAME|ORGANIZATION>.github.io/)
 ```
-```
+```shell
 Project Pages (https://<USERNAME|ORGANIZATION>.github.io/<PROJECT>/)
 ```
 
@@ -56,7 +56,7 @@ Hugo 官网给出了一个快速搭建的 [指南](https://gohugo.io/getting-sta
 ### 0x05 配置 Travis CI
 Travis CI 是通过 **.travis.yml** 文件来进行配置的。首先在本地站点根目录下创建 .travis.yml 文件，详细的配置说明可以在 [这里](https://docs.travis-ci.com/user/customizing-the-build) 查看，比较欣喜的是 Travis 已经提供了对 Github Pages 的部署支持，可以看 [这里](https://docs.travis-ci.com/user/deployment/pages/)，所以我们要做的就是先执行 hugo 命令来重新生成站点，然后进行部署即可，整个脚本如下：
 
-```
+```shell
 install:
   - rm -rf public || exit 0
 # Build the website
@@ -74,7 +74,7 @@ deploy:
 
 这里面有几点进行说明
 
-* script 部分，需要我们到 hugo 的 [下载地址](https://github.com/gohugoio/hugo/releases) 选择 **hugo_0.44_Linux-64bit.tar.gz** 进行下载，并解压，将其二进制文件拷贝到仓库根目录下的 binary 文件夹下，binary 没有的话自己创建一个。
+* script 部分，需要我们到 hugo 的 [下载地址](https://github.com/gohugoio/hugo/releases) 选择 **hugo_0.44_Linux-64bit.tar.gz** 进行下载，并解压，将其二进制文件拷贝到仓库根目录下的 binary 文件夹下，binary 如果没有，自己创建一个。
 * local_dir: 设置为 public 是因为在执行 hugo 命令时会自动生成public目录，该目录下的文件即最终的站点文件。对 Github Pages 部署的时候也是部署的该文件夹下的文件。由于每次部署该文件夹下的文件都会重新生成，所以我们创建一个 .gitignore 文件，并将 `public` 添加进去，这样就不会纳入git的版本管理范畴。接下来在仓库根目录下执行
 
 ```
@@ -98,13 +98,15 @@ git push -u origin master
 ## 验收成果
 好了，到目前为止，工作基本上就完成了，那么每次写博客的流程是什么样子的呢？
 
-```
+```shell
 hugo new post/xxx.md
 git add .
 git commit -m "xxx"
 git push -u origin master
 ```
 这就可以了，博客的构建和部署直接交给了 Travis CI 来完成，是不是很爽？就到这里，Enjoy～
+
+>温馨提示: 留言板在科学上网环境下可见
 
 
 
