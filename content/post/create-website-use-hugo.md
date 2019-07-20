@@ -38,20 +38,20 @@ Hugo 官网给出了一个快速搭建的 [指南](https://gohugo.io/getting-sta
 在下面的步骤中，需要在 Travis 配置 Github 的 Personal Access Token，参考 [这里](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) 来完成此操作
 
 ### 0x04 登录 Travis CI 并关联指定 Github 仓库
-访问 [官网](https://travis-ci.com/)，点击右上角的 **Sign in with GitHub**，通过输入 Github 密码来完成 Travis CI 的登录，通过 Github 的授权后，Travis CI 即可访问 Github 里的仓库，刚刚登陆进去的界面是这样
+访问 [官网](https://travis-ci.com/)，点击右上角的 **Sign in with GitHub**，通过输入 Github 密码来完成 Travis CI 的登录，通过 Github 的授权后，Travis CI 即可访问 Github 里的仓库，登陆进去的界面是这样
 
-![](http://otdyhkopo.bkt.clouddn.com/2018071715318145986671.png)
+![](/img/20190720055123.png)
 
 点击 **Activate** 按钮，如图，选择对应的仓库
 
-![](http://otdyhkopo.bkt.clouddn.com/20180717153181516169546.png)
+![](/img/20190720055632.png)
 
 选中 **Only select repositories**，并在下拉菜单中选中对应 repo，然后点击 **Approve & Install**，页面会进行刷新，如图
 
-![](http://otdyhkopo.bkt.clouddn.com/20180717153181546794094.png)
+![](/img/20190720055713.png)
 
 然后点击出现的 blog 条目，进入后设置 Github Personal Access Token，如图
-![](http://otdyhkopo.bkt.clouddn.com/20180717153181883480795.png)
+![](/img/20190720055829.png)
 
 ### 0x05 配置 Travis CI
 Travis CI 是通过 **.travis.yml** 文件来进行配置的。首先在本地站点根目录下创建 .travis.yml 文件，详细的配置说明可以在 [这里](https://docs.travis-ci.com/user/customizing-the-build) 查看，比较欣喜的是 Travis 已经提供了对 Github Pages 的部署支持，可以看 [这里](https://docs.travis-ci.com/user/deployment/pages/)，所以我们要做的就是先执行 hugo 命令来重新生成站点，然后进行部署即可，整个脚本如下：
@@ -84,16 +84,16 @@ git push -u origin master
 ```
 当 push 成功后，就会启动 Travis的CI脚本，进入 Travis的网页控制台看一下，如图
 
-![](http://otdyhkopo.bkt.clouddn.com/2018071715318186175089.png)
+![](/img/20190720060654.png)
 
 这说明脚本已经构建成功了，此时 travis 会自动在 github 的 blog 仓库下创建了一个 gh-pages 分支，并将 public 目录下的代码提交到了该分支，如图
 
-![](http://otdyhkopo.bkt.clouddn.com/20180717153181897274587.png)
+![](/img/20190720060847.png)
 
 ### 0x06 配置 Github Pages
 下面回到 github，在仓库的 Settings 选项下，找到 Github Pages 设置，如图
 
-![](http://otdyhkopo.bkt.clouddn.com/20180717153181976871941.png)，其中 Source 会默认配置成 **gh-pages branch**，下面可以设置自定义域名，自定义域名之后再说。
+![](/img/20190720061545.png)，其中 Source 会默认配置成 **gh-pages branch**，下面可以设置自定义域名，自定义域名之后再说。
 
 ## 验收成果
 好了，到目前为止，工作基本上就完成了，那么每次写博客的流程是什么样子的呢？
