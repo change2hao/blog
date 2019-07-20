@@ -82,7 +82,7 @@ git add .
 git commit -m "config travis.ci"
 git push -u origin master
 ```
-当 push 成功后，就会启动 Travis的CI脚本，进入 Travis的网页控制台看一下，如图
+当 push 成功后，就会启动 Travis 的 CI 脚本，进入 Travis 的网页控制台看一下，如图
 
 ![](/img/20190720060654.png)
 

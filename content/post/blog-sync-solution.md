@@ -5,7 +5,7 @@ tags:
 ---
 
 #### 问题引出
-**hexo**作为一个非常优秀的静态博客框架，越来越受到程序员的青睐，包括我也早已投入了hexo的怀抱，hexo与传统的博客托管网站不同的一点是博客的源文件是保存在本地的，并通过hexo框架提供的 `hexo generate` 和 `hexo deploy` 命令将 markdown 文件生成相应的 html 文件，并发布到 github-pages 上去。我们每次发布博客都要执行这样的流程，那就会遇到一个问题，比如家里跟公司的电脑我都要用来发布博客，怎么保持每台电脑上的文件的同步呢？
+**hexo **作为一个非常优秀的静态博客框架，越来越受到程序员的青睐，包括我也早已投入了 hexo 的怀抱，hexo 与传统的博客托管网站不同的一点是博客的源文件是保存在本地的，并通过 hexo 框架提供的 `hexo generate` 和 `hexo deploy` 命令将 markdown 文件生成相应的 html 文件，并发布到 github-pages 上去。我们每次发布博客都要执行这样的流程，那就会遇到一个问题，比如家里跟公司的电脑我都要用来发布博客，怎么保持每台电脑上的文件的同步呢？
 
 #### 解决思路
 
@@ -13,9 +13,9 @@ tags:
 
 比如 **DropBox、iCloudDrive**，但是这种工具有一些缺点，没有版本控制。
 
-另一种思路利用github进行源码托管，这种方式很好的解决了前者的缺点。
+另一种思路利用 github 进行源码托管，这种方式很好的解决了前者的缺点。
 
-我们通过 `hexo deploy `发布到 github-pages 的时候，会将 public 目录（html文件）自动push到远程仓库的master 分支。但这个对多终端博客同步没有任何意义，因为我们每次 `hexo generate `都会根据 source 目录下的 markdown 源文件重新生成 html 文件，所以解决问题的关键是怎么同步 source 目录下的源文件，不仅如此，还有配置文件 _config.yml，scanffolds 目录，themes 目录。
+我们通过 `hexo deploy `发布到 github-pages 的时候，会将 public 目录（html文件）自动push到远程仓库的master 分支。但这个对多终端博客同步没有任何意义，因为我们每次 `hexo generate ` 都会根据 source 目录下的 markdown 源文件重新生成 html 文件，所以解决问题的关键是怎么同步 source 目录下的源文件，不仅如此，还有配置文件 _config.yml，scanffolds 目录，themes 目录。
 
 ##### 具体步骤
 
