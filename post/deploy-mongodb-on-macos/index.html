@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Mac下安装使用MongoDB - Levy&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="levy" /><meta name="description" content="这段时间自己打算做一个视频聊天的 app，客户端（iOS），服务器（NodeJS&#43;MongoDB）打算全自己上。后者对我来说零经验，不过老话说" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://change2hao.github.io/post/deploy-mongodb-on-macos/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Mac下安装使用MongoDB" />
+<meta property="og:description" content="这段时间自己打算做一个视频聊天的 app，客户端（iOS），服务器（NodeJS&#43;MongoDB）打算全自己上。后者对我来说零经验，不过老话说" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://change2hao.github.io/post/deploy-mongodb-on-macos/" />
+<meta property="article:published_time" content="2015-03-20T14:31:28&#43;08:00"/>
+<meta property="article:modified_time" content="2015-03-20T14:31:28&#43;08:00"/>
+
+<meta itemprop="name" content="Mac下安装使用MongoDB">
+<meta itemprop="description" content="这段时间自己打算做一个视频聊天的 app，客户端（iOS），服务器（NodeJS&#43;MongoDB）打算全自己上。后者对我来说零经验，不过老话说">
+
+
+<meta itemprop="datePublished" content="2015-03-20T14:31:28&#43;08:00" />
+<meta itemprop="dateModified" content="2015-03-20T14:31:28&#43;08:00" />
+<meta itemprop="wordCount" content="1535">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mac下安装使用MongoDB"/>
+<meta name="twitter:description" content="这段时间自己打算做一个视频聊天的 app，客户端（iOS），服务器（NodeJS&#43;MongoDB）打算全自己上。后者对我来说零经验，不过老话说"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Levy&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/blog/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Levy&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Mac下安装使用MongoDB</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2015-03-20 </span>
+        
+          <span class="more-meta"> 约 1535 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#安装mongodb">安装MongoDB</a></li>
+<li><a href="#设置mongodb数据库位置">设置MongoDB数据库位置</a></li>
+<li><a href="#进入mongodb-shell-模式">进入mongodb shell 模式</a></li>
+<li><a href="#mongodb-练习">mongodb 练习</a>
+<ul>
+<li><a href="#创建">创建</a></li>
+<li><a href="#读取">读取</a></li>
+<li><a href="#更新">更新</a></li>
+<li><a href="#删除">删除</a></li>
+</ul></li>
+<li><a href="#使用shell的窍门">使用shell的窍门</a>
+<ul>
+<li><a href="#查看数据库级别的命令帮助">查看数据库级别的命令帮助</a></li>
+<li><a href="#查看函数源码">查看函数源码</a></li>
+<li><a href="#集合名与数据库类的属性同名">集合名与数据库类的属性同名</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>这段时间自己打算做一个视频聊天的 app，客户端（iOS），服务器（NodeJS+MongoDB）打算全自己上。后者对我来说零经验，不过老话说的好，生命在于折腾嘛。今天先来说一下在 Mac 下如何搭建 MongoDB 环境。</p>
+
+<h4 id="安装mongodb">安装MongoDB</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ brew update
+$ brew install mongodb</code></pre></td></tr></table>
+</div>
+</div>
+<p>喝杯茶的功夫就安装好了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">==</span>&gt; Downloading https://homebrew.bintray.com/bottles/mongodb-3.0.0.yosemite.bott
+<span class="c1">######################################################################## 100.0%</span>
+<span class="o">==</span>&gt; Pouring mongodb-3.0.0.yosemite.bottle.1.tar.gz
+<span class="o">==</span>&gt; Caveats
+To have launchd start mongodb at login:
+    ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
+Then to load mongodb now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+Or, <span class="k">if</span> you don<span class="err">&#39;</span>t want/need launchctl, you can just run:
+    mongod --config /usr/local/etc/mongod.conf
+<span class="o">==</span>&gt; Summary
+🍺  /usr/local/Cellar/mongodb/3.0.0: <span class="m">17</span> files, 152M</code></pre></td></tr></table>
+</div>
+</div>
+<p>从打印日志可以看出，mongdb 安装在 <code>/usr/local/Cellar/</code>,版本是 3.0.0，简单看了一下介绍，刚发布不久，性能各种提升。</p>
+
+<h4 id="设置mongodb数据库位置">设置MongoDB数据库位置</h4>
+
+<p>接下来要设置数据库存放位置，首先我们要先创建目录，系统默认的路径是 /data/db，不过需要提前手动创建，否则启动 mongodb 会报类似错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ mkdir -p /data/db
+$ mongodb</code></pre></td></tr></table>
+</div>
+</div>
+<p>当然你也可以自己设定数据库存储目录，比如 <code>~/data/db</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ mkdir -p ~/data/db
+$ mongodb --dbpath ~/data/db</code></pre></td></tr></table>
+</div>
+</div>
+<p>注：如果不提前创建目录，在执行 <code>mongodb --dbpath ~/data/db</code> 时会报类似错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="m">2015</span>-03-20T14:06:42.977+0800 I CONTROL  <span class="o">[</span>initandlisten<span class="o">]</span> options: <span class="o">{</span> storage: <span class="o">{</span> dbPath: <span class="s2">&#34;/Users/tianliwei/data/db&#34;</span> <span class="o">}</span> <span class="o">}</span>
+<span class="m">2015</span>-03-20T14:06:42.977+0800 I STORAGE  <span class="o">[</span>initandlisten<span class="o">]</span> exception in initAndListen: <span class="m">10296</span> 
+*********************************************************************
+ ERROR: dbpath <span class="o">(</span>/Users/tianliwei/data/db<span class="o">)</span> does not exist.
+ Create this directory or give existing directory in --dbpath.
+ See http://dochub.mongodb.org/core/startingandstoppingmongo
+*********************************************************************
+, terminating</code></pre></td></tr></table>
+</div>
+</div>
+<p>这样 mongodb 就启动了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="m">2015</span>-03-20T14:16:05.630+0800 I CONTROL  <span class="o">[</span>initandlisten<span class="o">]</span> MongoDB starting : <span class="nv">pid</span><span class="o">=</span><span class="m">86383</span> <span class="nv">port</span><span class="o">=</span><span class="m">27017</span> <span class="nv">dbpath</span><span class="o">=</span>/Users/tianliwei/data/db <span class="m">64</span>-bit <span class="nv">host</span><span class="o">=</span>tianliweis-iMac.local
+<span class="m">2015</span>-03-20T14:16:05.631+0800 I CONTROL  <span class="o">[</span>initandlisten<span class="o">]</span> db version v3.0.0
+<span class="m">2015</span>-03-20T14:16:05.631+0800 I CONTROL  <span class="o">[</span>initandlisten<span class="o">]</span> git version: nogitversion
+<span class="m">2015</span>-03-20T14:16:05.631+0800 I CONTROL  <span class="o">[</span>initandlisten<span class="o">]</span> build info: Darwin miniyosemite.local <span class="m">14</span>.1.0 Darwin Kernel Version <span class="m">14</span>.1.0: Mon Dec <span class="m">22</span> <span class="m">23</span>:10:38 PST <span class="m">2014</span><span class="p">;</span> root:xnu-2782.10.72~2/RELEASE_X86_64 x86_64 <span class="nv">BOOST_LIB_VERSION</span><span class="o">=</span>1_49
+<span class="m">2015</span>-03-20T14:16:05.631+0800 I CONTROL  <span class="o">[</span>initandlisten<span class="o">]</span> allocator: system
+<span class="m">2015</span>-03-20T14:16:05.631+0800 I CONTROL  <span class="o">[</span>initandlisten<span class="o">]</span> options: <span class="o">{</span> storage: <span class="o">{</span> dbPath: <span class="s2">&#34;/Users/tianliwei/data/db&#34;</span> <span class="o">}</span> <span class="o">}</span>
+<span class="m">2015</span>-03-20T14:16:05.642+0800 I JOURNAL  <span class="o">[</span>initandlisten<span class="o">]</span> journal <span class="nv">dir</span><span class="o">=</span>/Users/tianliwei/data/db/journal
+<span class="m">2015</span>-03-20T14:16:05.642+0800 I JOURNAL  <span class="o">[</span>initandlisten<span class="o">]</span> recover : no journal files present, no recovery needed
+<span class="m">2015</span>-03-20T14:16:05.655+0800 I JOURNAL  <span class="o">[</span>durability<span class="o">]</span> Durability thread started
+<span class="m">2015</span>-03-20T14:16:05.655+0800 I JOURNAL  <span class="o">[</span>journal writer<span class="o">]</span> Journal writer thread started
+<span class="m">2015</span>-03-20T14:16:05.720+0800 I NETWORK  <span class="o">[</span>initandlisten<span class="o">]</span> waiting <span class="k">for</span> connections on port <span class="m">27017</span>
+<span class="m">2015</span>-03-20T14:30:06.596+0800 I NETWORK  <span class="o">[</span>initandlisten<span class="o">]</span> connection accepted from <span class="m">127</span>.0.0.1:63987 <span class="c1">#1 (1 connection now open)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="进入mongodb-shell-模式">进入mongodb shell 模式</h4>
+
+<p>然后下边就一直空白，处于监听状态，接下来我们另启动应该终端，输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ mongodb</code></pre></td></tr></table>
+</div>
+</div>
+<p>然后会进入 mongodb 的 shell：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">MongoDB shell version: <span class="m">3</span>.0.0
+connecting to: <span class="nb">test</span>
+Welcome to the MongoDB shell.
+For interactive help, <span class="nb">type</span> <span class="s2">&#34;help&#34;</span>.
+For more comprehensive documentation, see
+	http://docs.mongodb.org/
+Questions? Try the support group
+	http://groups.google.com/group/mongodb-user
+&gt; </code></pre></td></tr></table>
+</div>
+</div>
+<p>PS:<strong>shell会在启动时自动连接MongoDB服务器，所以要确保在使用shell之前启动mongodb，这就是为什么要另开一个终端窗口的原因</strong>。</p>
+
+<p>接下来就可以进行数据库的各种操作了，shell是功能完备的JavaScript解析器，可以运行任意JavaScript程序，虽然这个功能很酷，但shell真正的威力还在于它是一个独立的MongoDB客户端，开启的时候，shell会连接到MongoDB服务器的test数据库，并将这个数据库连接赋值给全局变量db，这个变量是通过shell访问MongoDB的主要入口点。shell还有些非JavaScript语法扩展，是为了习惯于SQL shell的用户而添加的。例如，选择要使用的数据库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; use foobar
+switched to db foobar</code></pre></td></tr></table>
+</div>
+</div>
+<p>现在如果看看db，发现其指向foobar数据库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db
+foobar</code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="mongodb-练习">mongodb 练习</h4>
+
+<p>下面我们来进行一下 mongodb 的练习，如果利用shell进行：创建、读取、更新、和删除（CRUD）。</p>
+
+<h5 id="创建">创建</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; <span class="nv">post</span> <span class="o">=</span> <span class="o">{</span><span class="s2">&#34;title&#34;</span>:<span class="s2">&#34;My Blog Post&#34;</span>,<span class="s2">&#34;content&#34;</span>:<span class="s2">&#34;Here&#39;s my blog post&#34;</span>,<span class="s2">&#34;date&#34;</span>:new Date<span class="o">()}</span>
+<span class="o">{</span>
+	<span class="s2">&#34;title&#34;</span> : <span class="s2">&#34;My Blog Post&#34;</span>,
+	<span class="s2">&#34;content&#34;</span> : <span class="s2">&#34;Here&#39;s my blog post&#34;</span>,
+	<span class="s2">&#34;date&#34;</span> : ISODate<span class="o">(</span><span class="s2">&#34;2015-03-20T07:35:32.468Z&#34;</span><span class="o">)</span>
+<span class="o">}</span>
+&gt; db.blog.insert<span class="o">(</span>post<span class="o">)</span>
+WriteResult<span class="o">({</span> <span class="s2">&#34;nInserted&#34;</span> : <span class="m">1</span> <span class="o">})</span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="读取">读取</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db.blog.find<span class="o">()</span>
+<span class="o">{</span> <span class="s2">&#34;_id&#34;</span> : ObjectId<span class="o">(</span><span class="s2">&#34;550bcdf75039ef1c85e5d6a7&#34;</span><span class="o">)</span>, <span class="s2">&#34;title&#34;</span> : <span class="s2">&#34;My Blog Post&#34;</span>, <span class="s2">&#34;content&#34;</span> : <span class="s2">&#34;Here&#39;s my blog post&#34;</span>, <span class="s2">&#34;date&#34;</span> : ISODate<span class="o">(</span><span class="s2">&#34;2015-03-20T07:35:32.468Z&#34;</span><span class="o">)</span> <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="更新">更新</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db.blog.update<span class="o">({</span>title:<span class="s2">&#34;My Blog Post&#34;</span><span class="o">}</span>,post<span class="o">)</span>
+WriteResult<span class="o">({</span> <span class="s2">&#34;nMatched&#34;</span> : <span class="m">1</span>, <span class="s2">&#34;nUpserted&#34;</span> : <span class="m">0</span>, <span class="s2">&#34;nModified&#34;</span> : <span class="m">1</span> <span class="o">})</span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="删除">删除</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db.blog.remove<span class="o">({</span>title:<span class="s2">&#34;My Blog Post&#34;</span><span class="o">})</span>
+WriteResult<span class="o">({</span> <span class="s2">&#34;nRemoved&#34;</span> : <span class="m">1</span> <span class="o">})</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="使用shell的窍门">使用shell的窍门</h4>
+
+<h5 id="查看数据库级别的命令帮助">查看数据库级别的命令帮助</h5>
+
+<p>使用 db.help() 可以查看数据库级别的命令帮助</p>
+
+<h5 id="查看函数源码">查看函数源码</h5>
+
+<p>在输入的时候不要输入括号，这样就会显示该函数的 JavaScript 源代码。比如 <code>db.foo.update</code></p>
+
+<h5 id="集合名与数据库类的属性同名">集合名与数据库类的属性同名</h5>
+
+<p>如果出现集合名与数据库类的属性同名的情况，例如，要访问 version 这个集合，使用 db.version 就不行，因为 db.version 是个数据库函数。这样会直接打印函数的源码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db.version
+<span class="k">function</span> <span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> this.serverBuildInfo<span class="o">()</span>.version<span class="p">;</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当 JavaScript 只有在 db 中找不到指定的属性时，才会将其作为集合返回。当有属性与目标集合同名是，可以使用getCollection 函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db.getCollection<span class="o">(</span><span class="s2">&#34;version&#34;</span><span class="o">)</span><span class="p">;</span>
+test.version</code></pre></td></tr></table>
+</div>
+</div>
+<p>还有比如 foo-bar 是个有效的集合名，但在 JavaScript 中就变成变量相减了。通过 db.getCollection(&ldquo;foo-bar&rdquo;）就可以得到 foo-bar 集合。</p>
+
+<p>好了，今天就记录这么多吧~</p>
+
+<blockquote>
+<p>温馨提示: 留言板在科学上网环境下可见</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">levy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2015-03-20
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat-qr-code.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay-qr-code.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/about-my-productivity-tool-in-macos/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">生产力工具篇(MacOSX)</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/blog-sync-solution/">
+            <span class="next-text nav-default">关于博客同步的解决办法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'tiansblog';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:lw_tian@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/change2hao" class="iconfont icon-github" title="github"></a>
+  <a href="https://change2hao.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">levy</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-40901416-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

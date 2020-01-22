@@ -1,0 +1,89 @@
+<?xml-stylesheet type="text/xsl" href="https://change2hao.github.io/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://change2hao.github.io/about/</loc>
+    <lastmod>2017-08-28T21:41:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/</loc>
+    <lastmod>2018-07-16T20:04:08+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/</loc>
+    <lastmod>2018-07-16T20:04:08+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/create-website-use-hugo/</loc>
+    <lastmod>2018-07-16T20:04:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/update-nodejs-on-mac/</loc>
+    <lastmod>2018-07-15T20:30:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/gitlab-ci-tutorial-1/</loc>
+    <lastmod>2018-05-07T18:16:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/why-blog-as-an-developer/</loc>
+    <lastmod>2015-05-09T20:03:53+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/about-my-productivity-tool-in-macos/</loc>
+    <lastmod>2015-04-15T16:30:05+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/deploy-mongodb-on-macos/</loc>
+    <lastmod>2015-03-20T14:31:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/blog-sync-solution/</loc>
+    <lastmod>2015-03-17T15:43:50+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/post/deploy-turnserver-on-ubuntu14-04/</loc>
+    <lastmod>2015-03-05T00:25:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://change2hao.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

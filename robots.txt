@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://change2hao.github.io/sitemap.xml

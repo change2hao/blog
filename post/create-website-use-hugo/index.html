@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用 Hugo &#43; Travis CI &#43; Github Pages 搭建静态博客 - Levy&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="levy" /><meta name="description" content="最近花了点时间把几年前搭建的博客进行了重建，重建之后的感觉简直爽极了，就好像装修完的新家一样让人赏心悦目，同时有强大的 Travis CI 加持，就好像身边有" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://change2hao.github.io/post/create-website-use-hugo/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="使用 Hugo &#43; Travis CI &#43; Github Pages 搭建静态博客" />
+<meta property="og:description" content="最近花了点时间把几年前搭建的博客进行了重建，重建之后的感觉简直爽极了，就好像装修完的新家一样让人赏心悦目，同时有强大的 Travis CI 加持，就好像身边有" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://change2hao.github.io/post/create-website-use-hugo/" />
+<meta property="article:published_time" content="2018-07-16T20:04:08&#43;08:00"/>
+<meta property="article:modified_time" content="2018-07-16T20:04:08&#43;08:00"/>
+
+<meta itemprop="name" content="使用 Hugo &#43; Travis CI &#43; Github Pages 搭建静态博客">
+<meta itemprop="description" content="最近花了点时间把几年前搭建的博客进行了重建，重建之后的感觉简直爽极了，就好像装修完的新家一样让人赏心悦目，同时有强大的 Travis CI 加持，就好像身边有">
+
+
+<meta itemprop="datePublished" content="2018-07-16T20:04:08&#43;08:00" />
+<meta itemprop="dateModified" content="2018-07-16T20:04:08&#43;08:00" />
+<meta itemprop="wordCount" content="1519">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用 Hugo &#43; Travis CI &#43; Github Pages 搭建静态博客"/>
+<meta name="twitter:description" content="最近花了点时间把几年前搭建的博客进行了重建，重建之后的感觉简直爽极了，就好像装修完的新家一样让人赏心悦目，同时有强大的 Travis CI 加持，就好像身边有"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Levy&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/blog/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Levy&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用 Hugo &#43; Travis CI &#43; Github Pages 搭建静态博客</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-07-16 </span>
+        
+          <span class="more-meta"> 约 1519 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#hugo-介绍">Hugo 介绍</a></li>
+<li><a href="#travis-ci-介绍">Travis CI 介绍</a></li>
+<li><a href="#github-pages-介绍">Github Pages 介绍</a></li>
+<li><a href="#搭建博客的流程">搭建博客的流程</a>
+<ul>
+<li><a href="#0x00-在-github-创建一个用于托管站点的仓库">0x00 在 Github 创建一个用于托管站点的仓库</a></li>
+<li><a href="#0x01-使用-hugo-在本地创建一个站点">0x01 使用 Hugo 在本地创建一个站点</a></li>
+<li><a href="#0x02-将生成的本地文件推送到-github-仓库">0x02 将生成的本地文件推送到 Github 仓库</a></li>
+<li><a href="#0x03-创建-github-personal-access-token">0x03 创建 Github Personal Access Token</a></li>
+<li><a href="#0x04-登录-travis-ci-并关联指定-github-仓库">0x04 登录 Travis CI 并关联指定 Github 仓库</a></li>
+<li><a href="#0x05-配置-travis-ci">0x05 配置 Travis CI</a></li>
+<li><a href="#0x06-配置-github-pages">0x06 配置 Github Pages</a></li>
+</ul></li>
+<li><a href="#验收成果">验收成果</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>最近花了点时间把几年前搭建的博客进行了重建，重建之后的感觉简直爽极了，就好像装修完的新家一样让人赏心悦目，同时有强大的 Travis CI 加持，就好像身边有一位贴心的管家，幸福指数上升了一个高度。下面步入正题</p>
+
+<h2 id="hugo-介绍">Hugo 介绍</h2>
+
+<p>目前搭建静态博客的工具有很多，有人专门整理了一个 <a href="https://www.staticgen.com">列表</a> 可以了解下，这里简单说一下 <strong>Hugo</strong>， 它是一种开源的静态站点生成器框架。何为静态站点生成器呢？就是说基于简单的文本内容即可生成可以直接在浏览器访问的 html 网页，对于 Hugo 来说，文本内容即采用 Markdown 语法的 <strong>md</strong> 源文件。Hugo 采用 GO 语言编写，最突出的优点就是执行效率高。</p>
+
+<h2 id="travis-ci-介绍">Travis CI 介绍</h2>
+
+<p><a href="https://travis-ci.org">Travis CI</a> 是一个持续集成服务，用于构建和部署项目。何为持续集成呢？就是说项目代码在发生改动的时候会<strong>自动</strong>构建和部署，确保项目的正常运行。针对 Github 上的开源项目，Travis CI 提供免费的服务，下面再说一下 Github Pages。</p>
+
+<h2 id="github-pages-介绍">Github Pages 介绍</h2>
+
+<p><a href="https://pages.github.com">Github Pages</a> 是 Github 提供的免费的静态网站托管服务，用起来方便而且功能强大，不仅没有空间限制，还可以绑定自己的域名。</p>
+
+<p>下面来说一下用 Hugo 配合 Travis CI 和 Github Pages 来搭建博客的过程</p>
+
+<h2 id="搭建博客的流程">搭建博客的流程</h2>
+
+<h3 id="0x00-在-github-创建一个用于托管站点的仓库">0x00 在 Github 创建一个用于托管站点的仓库</h3>
+
+<p>Hugo 官网有一个 <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">说明文档</a>，里面提到了两种情况，对应的网址有些不同。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">User/Organization Pages <span class="o">(</span>https://&lt;USERNAME<span class="p">|</span>ORGANIZATION&gt;.github.io/<span class="o">)</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">Project Pages <span class="o">(</span>https://&lt;USERNAME<span class="p">|</span>ORGANIZATION&gt;.github.io/&lt;PROJECT&gt;/<span class="o">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>笔者选择了 <strong>Project Pages</strong>，因为文档里说 <strong>User/Organization Pages</strong> 类型只能将站点内容部署到主分支，而后面 的 Travis CI 部署默认是在 gh-pages 分支。</p>
+
+<h3 id="0x01-使用-hugo-在本地创建一个站点">0x01 使用 Hugo 在本地创建一个站点</h3>
+
+<p>Hugo 官网给出了一个快速搭建的 <a href="https://gohugo.io/getting-started/quick-start/">指南</a>，直接按照此文档一步步操作即可。</p>
+
+<h3 id="0x02-将生成的本地文件推送到-github-仓库">0x02 将生成的本地文件推送到 Github 仓库</h3>
+
+<p>可以参考 <a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">这里</a> 来完成此操作</p>
+
+<h3 id="0x03-创建-github-personal-access-token">0x03 创建 Github Personal Access Token</h3>
+
+<p>在下面的步骤中，需要在 Travis 配置 Github 的 Personal Access Token，参考 <a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">这里</a> 来完成此操作</p>
+
+<h3 id="0x04-登录-travis-ci-并关联指定-github-仓库">0x04 登录 Travis CI 并关联指定 Github 仓库</h3>
+
+<p>访问 <a href="https://travis-ci.com/">官网</a>，点击右上角的 <strong>Sign in with GitHub</strong>，通过输入 Github 密码来完成 Travis CI 的登录，通过 Github 的授权后，Travis CI 即可访问 Github 里的仓库，登陆进去的界面是这样</p>
+
+<p><img src="/img/20190720055123.png" alt="" /></p>
+
+<p>点击 <strong>Activate</strong> 按钮，如图，选择对应的仓库</p>
+
+<p><img src="/img/20190720055632.png" alt="" /></p>
+
+<p>选中 <strong>Only select repositories</strong>，并在下拉菜单中选中对应 repo，然后点击 <strong>Approve &amp; Install</strong>，页面会进行刷新，如图</p>
+
+<p><img src="/img/20190720055713.png" alt="" /></p>
+
+<p>然后点击出现的 blog 条目，进入后设置 Github Personal Access Token，如图
+<img src="/img/20190720055829.png" alt="" /></p>
+
+<h3 id="0x05-配置-travis-ci">0x05 配置 Travis CI</h3>
+
+<p>Travis CI 是通过 <strong>.travis.yml</strong> 文件来进行配置的。首先在本地站点根目录下创建 .travis.yml 文件，详细的配置说明可以在 <a href="https://docs.travis-ci.com/user/customizing-the-build">这里</a> 查看，比较欣喜的是 Travis 已经提供了对 Github Pages 的部署支持，可以看 <a href="https://docs.travis-ci.com/user/deployment/pages/">这里</a>，所以我们要做的就是先执行 hugo 命令来重新生成站点，然后进行部署即可，整个脚本如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">install:
+  - rm -rf public <span class="o">||</span> <span class="nb">exit</span> <span class="m">0</span>
+<span class="c1"># Build the website</span>
+script:
+  - binary/hugo
+<span class="c1"># Deploy to GitHub pages</span>
+deploy:
+  provider: pages
+  skip_cleanup: <span class="nb">true</span>
+  github_token: <span class="nv">$GITHUB_TOKEN</span>
+  local_dir: public
+  on:
+    branch: master</code></pre></td></tr></table>
+</div>
+</div>
+<p>这里面有几点进行说明</p>
+
+<ul>
+<li>script 部分，需要我们到 hugo 的 <a href="https://github.com/gohugoio/hugo/releases">下载地址</a> 选择 <strong>hugo_0.44_Linux-64bit.tar.gz</strong> 进行下载，并解压，将其二进制文件拷贝到仓库根目录下的 binary 文件夹下，binary 如果没有，自己创建一个。</li>
+
+<li><p>local_dir: 设置为 public 是因为在执行 hugo 命令时会自动生成public目录，该目录下的文件即最终的站点文件。对 Github Pages 部署的时候也是部署的该文件夹下的文件。由于每次部署该文件夹下的文件都会重新生成，所以我们创建一个 .gitignore 文件，并将 <code>public</code> 添加进去，这样就不会纳入git的版本管理范畴。接下来在仓库根目录下执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">git add .
+git commit -m &#34;config travis.ci&#34;
+git push -u origin master</pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<p>当 push 成功后，就会启动 Travis 的 CI 脚本，进入 Travis 的网页控制台看一下，如图</p>
+
+<p><img src="/img/20190720060654.png" alt="" /></p>
+
+<p>这说明脚本已经构建成功了，此时 travis 会自动在 github 的 blog 仓库下创建了一个 gh-pages 分支，并将 public 目录下的代码提交到了该分支，如图</p>
+
+<p><img src="/img/20190720060847.png" alt="" /></p>
+
+<h3 id="0x06-配置-github-pages">0x06 配置 Github Pages</h3>
+
+<p>下面回到 github，在仓库的 Settings 选项下，找到 Github Pages 设置，如图</p>
+
+<p><img src="/img/20190720061545.png" alt="" />，其中 Source 会默认配置成 <strong>gh-pages branch</strong>，下面可以设置自定义域名，自定义域名之后再说。</p>
+
+<h2 id="验收成果">验收成果</h2>
+
+<p>好了，到目前为止，工作基本上就完成了，那么每次写博客的流程是什么样子的呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">hugo new post/xxx.md
+git add .
+git commit -m <span class="s2">&#34;xxx&#34;</span>
+git push -u origin master</code></pre></td></tr></table>
+</div>
+</div>
+<p>这就可以了，博客的构建和部署直接交给了 Travis CI 来完成，是不是很爽？就到这里，Enjoy～</p>
+
+<blockquote>
+<p>温馨提示: 留言板在科学上网环境下可见</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">levy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-07-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat-qr-code.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay-qr-code.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/update-nodejs-on-mac/">
+            <span class="next-text nav-default">MacOSX 升级 nodejs 最快捷方法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'tiansblog';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:lw_tian@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/change2hao" class="iconfont icon-github" title="github"></a>
+  <a href="https://change2hao.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">levy</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-40901416-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>gitlab CI 搭建过程填坑指南 - Levy&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="levy" /><meta name="description" content="最近把 gitlab CI 环境重新搭建了一遍，记录下搭建过程遇到的问题以及解决办法： 首先说一下笔者的gitlab版本是目前最新版本：10.7.2，通过官方文" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://change2hao.github.io/post/gitlab-ci-tutorial-1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="gitlab CI 搭建过程填坑指南" />
+<meta property="og:description" content="最近把 gitlab CI 环境重新搭建了一遍，记录下搭建过程遇到的问题以及解决办法： 首先说一下笔者的gitlab版本是目前最新版本：10.7.2，通过官方文" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://change2hao.github.io/post/gitlab-ci-tutorial-1/" />
+<meta property="article:published_time" content="2018-05-07T18:16:20&#43;08:00"/>
+<meta property="article:modified_time" content="2018-05-07T18:16:20&#43;08:00"/>
+
+<meta itemprop="name" content="gitlab CI 搭建过程填坑指南">
+<meta itemprop="description" content="最近把 gitlab CI 环境重新搭建了一遍，记录下搭建过程遇到的问题以及解决办法： 首先说一下笔者的gitlab版本是目前最新版本：10.7.2，通过官方文">
+
+
+<meta itemprop="datePublished" content="2018-05-07T18:16:20&#43;08:00" />
+<meta itemprop="dateModified" content="2018-05-07T18:16:20&#43;08:00" />
+<meta itemprop="wordCount" content="734">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="gitlab CI 搭建过程填坑指南"/>
+<meta name="twitter:description" content="最近把 gitlab CI 环境重新搭建了一遍，记录下搭建过程遇到的问题以及解决办法： 首先说一下笔者的gitlab版本是目前最新版本：10.7.2，通过官方文"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Levy&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/blog/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Levy&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">gitlab CI 搭建过程填坑指南</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-05-07 </span>
+        
+          <span class="more-meta"> 约 734 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#gitlab-runner-的注册">gitlab-runner 的注册</a></li>
+<li><a href="#gitlab-runner-的安装">gitlab-runner 的安装</a></li>
+<li><a href="#xcode-build-在-xcode9-之后的改动">xcode-build 在 Xcode9 之后的改动</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>最近把 gitlab CI 环境重新搭建了一遍，记录下搭建过程遇到的问题以及解决办法：</p>
+
+<p>首先说一下笔者的gitlab版本是目前最新版本：10.7.2，通过<a href="https://about.gitlab.com/installation/#ubuntu">官方文档</a> 安装运行在Ubuntu16.04.3 LTS 环境下。</p>
+
+<h4 id="gitlab-runner-的注册">gitlab-runner 的注册</h4>
+
+<p>因为是 iOS 项目，所以 gitlab-runner 需要选在 MacOS 平台，根据<a href="https://docs.gitlab.com/runner/register/index.html#macos">官方文档</a> 一步步操作即可，其中 <code>Enter your GitLab instance URL:</code>  和 <code>Enter the token you obtained to register the Runner:</code> 需要根据自己的项目里面的指示进行操作，如图 1、2 ：</p>
+
+<p><img src="/img/20190720082528.png" alt="gitlab-runner" /></p>
+
+<h4 id="gitlab-runner-的安装">gitlab-runner 的安装</h4>
+
+<p>根据<a href="https://docs.gitlab.com/runner/install/osx.html">官方文档</a>，一步步操作即可。</p>
+
+<p>这样 gitlab runner 就搭建好了，但是我在这里遇到了一个问题，如图：</p>
+
+<p><img src="/img/20190720082629.png" alt="gitlab_warning" /></p>
+
+<p>这里有一个灰色的叹号，这说明设置有问题，主要是因为我在执行 <code>gitlab-runner register</code> 时，曾经加过一次 sudo，通过sudo执行的是root权限，生成的配置文件路径是 <code>/etc/gitlab-runner/config.toml</code> ，用普通权限生成的配置文件路径是 <code>~/.gitlab-runner/config.toml</code> ，这样导致普通权限配置文件里面没有相应的配置信息，我把前者的内容替换到后者，执行 <code>gitlab-runner restart</code> ，变成了绿点，如第一张图所示，问题解决。</p>
+
+<p>OK，gitlab-runner 设置好了，下面就是编写 yml 配置文件，这里先不说配置文件的内容，先把问题抛出，在执行 pipeline 的时候，提示如下，真是一脸懵逼，这里不得不吐槽下 gitlab 的错误提示做的太不到位了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Running with gitlab-runner 10.7.1 (b9bba623)
+  on Runner_iOS ad5ad9f4
+Using Shell executor...
+Running on bogon...
+Cloning repository...
+Cloning into &#39;/Users/tianliwei/builds/ad5ad9f4/0/iOS/ninebot_4&#39;...
+Checking out c5b39b8a as master...
+Skipping Git submodules setup
+ERROR: Job failed: exit status 1</pre></td></tr></table>
+</div>
+</div>
+<p>经过一番排查发现了<a href="https://gitlab.com/gitlab-org/gitlab-runner/issues/114">答案</a> ，发现这是一个关于 rvm 的坑，我们都知道 rvm 是 ruby 版本管理的神器，功能很强，但是不得不说这也很容易埋坑，这里就是因为 rvm 重写了 cd 函数导致脚本在执行 <code>cd</code> 指令时出错，解决办法就是在 <code>.bashrc</code> 或 <code>.bash_profile</code> 加一句 <code>unset cd</code> , OK 这个坑填上了。</p>
+
+<h4 id="xcode-build-在-xcode9-之后的改动">xcode-build 在 Xcode9 之后的改动</h4>
+
+<p>然后就是脚本内容了，脚本用的我在一年前写的脚本，然后不出意料的出错了，主要是因为 Xcode9 的 xcodebuild 工具去掉了 <code>-exportFormat</code> 和 <code>-exportProvisioningProfile</code>  选项，用 <code>-exportOptionsPlist exportOptions.plist</code>  代替就好啦。至此填坑完成，下一篇说一下 .gitlab-ci.yml 的配置选项及实践，敬请期待。</p>
+
+<blockquote>
+<p>温馨提示: 留言板在科学上网环境下可见</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">levy</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-05-07
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat-qr-code.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay-qr-code.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/update-nodejs-on-mac/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MacOSX 升级 nodejs 最快捷方法</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/why-blog-as-an-developer/">
+            <span class="next-text nav-default">程序员为什么要写技术博客</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'tiansblog';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:lw_tian@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/change2hao" class="iconfont icon-github" title="github"></a>
+  <a href="https://change2hao.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2013 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">levy</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-40901416-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

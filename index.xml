@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Levy&#39;s Blog</title>
+    <link>https://change2hao.github.io/</link>
+    <description>Recent content on Levy&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 16 Jul 2018 20:04:08 +0800</lastBuildDate>
+    
+	<atom:link href="https://change2hao.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://change2hao.github.io/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/about/</guid>
+      <description>I&amp;rsquo;m Levy, an iOS developer since 2012</description>
+    </item>
+    
+    <item>
+      <title>使用 Hugo &#43; Travis CI &#43; Github Pages 搭建静态博客</title>
+      <link>https://change2hao.github.io/post/create-website-use-hugo/</link>
+      <pubDate>Mon, 16 Jul 2018 20:04:08 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/post/create-website-use-hugo/</guid>
+      <description>最近花了点时间把几年前搭建的博客进行了重建，重建之后的感觉简直爽极了，就好像装修完的新家一样让人赏心悦目，同时有强大的 Travis CI 加持，就好像身边有</description>
+    </item>
+    
+    <item>
+      <title>MacOSX 升级 nodejs 最快捷方法</title>
+      <link>https://change2hao.github.io/post/update-nodejs-on-mac/</link>
+      <pubDate>Sun, 15 Jul 2018 20:30:09 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/post/update-nodejs-on-mac/</guid>
+      <description>第一步，先查看本机node.js版本： 1 $ node -v 第二步，清除node.js的cache： 1 $ sudo npm cache clean -f 第三步，安装 n 工具，这个工具是专门用来管</description>
+    </item>
+    
+    <item>
+      <title>gitlab CI 搭建过程填坑指南</title>
+      <link>https://change2hao.github.io/post/gitlab-ci-tutorial-1/</link>
+      <pubDate>Mon, 07 May 2018 18:16:20 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/post/gitlab-ci-tutorial-1/</guid>
+      <description>最近把 gitlab CI 环境重新搭建了一遍，记录下搭建过程遇到的问题以及解决办法： 首先说一下笔者的gitlab版本是目前最新版本：10.7.2，通过官方文</description>
+    </item>
+    
+    <item>
+      <title>程序员为什么要写技术博客</title>
+      <link>https://change2hao.github.io/post/why-blog-as-an-developer/</link>
+      <pubDate>Sat, 09 May 2015 20:03:53 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/post/why-blog-as-an-developer/</guid>
+      <description>这个话题可谓是老生常谈了，不过我还是想把这件事拿出来，谈谈自己的一些感悟。 写博客有哪些好处呢？ 提高自己的思维逻辑 我觉得在与人交流或者沟通的时</description>
+    </item>
+    
+    <item>
+      <title>生产力工具篇(MacOSX)</title>
+      <link>https://change2hao.github.io/post/about-my-productivity-tool-in-macos/</link>
+      <pubDate>Wed, 15 Apr 2015 16:30:05 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/post/about-my-productivity-tool-in-macos/</guid>
+      <description>今天总结一下我在 MacOSX 下常用的工具，希望对那些 Mac 新手有些帮助。 密码管理器 1Password 1Password 是 Mac 下一款功能非常强大的密码管理工具，正如它的名字一样，你只需设置一</description>
+    </item>
+    
+    <item>
+      <title>Mac下安装使用MongoDB</title>
+      <link>https://change2hao.github.io/post/deploy-mongodb-on-macos/</link>
+      <pubDate>Fri, 20 Mar 2015 14:31:28 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/post/deploy-mongodb-on-macos/</guid>
+      <description>这段时间自己打算做一个视频聊天的 app，客户端（iOS），服务器（NodeJS+MongoDB）打算全自己上。后者对我来说零经验，不过老话说</description>
+    </item>
+    
+    <item>
+      <title>关于博客同步的解决办法</title>
+      <link>https://change2hao.github.io/post/blog-sync-solution/</link>
+      <pubDate>Tue, 17 Mar 2015 15:43:50 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/post/blog-sync-solution/</guid>
+      <description>问题引出 **hexo **作为一个非常优秀的静态博客框架，越来越受到程序员的青睐，包括我也早已投入了 hexo 的怀抱，hexo 与传统的博客托管网站不同的一点是博</description>
+    </item>
+    
+    <item>
+      <title>ubuntu14.04 搭建部署 turnserver</title>
+      <link>https://change2hao.github.io/post/deploy-turnserver-on-ubuntu14-04/</link>
+      <pubDate>Thu, 05 Mar 2015 00:25:22 +0800</pubDate>
+      
+      <guid>https://change2hao.github.io/post/deploy-turnserver-on-ubuntu14-04/</guid>
+      <description>最近做 webrtc 视频通话的 app，需要搭建 turnserver 作为打洞服务器，整理了一下。 首先 turnserver 推荐 google 自家开源的，项目地址在 这里 turnserver 搭建在 Ubuntu14.04 服务器上，首先下载源码，解压</description>
+    </item>
+    
+  </channel>
+</rss>
